@@ -11,11 +11,12 @@ class Converter:
         :param mapping: Name of the mapping file (without extension) to load from the 'mappings' directory.
         """
         self.mapping_file = os.path.join("mappings", f"{mapping}.json")
-        self.font = None
+        self.metadata = {}
+        self.rules = {}
         self.singles = {}
         self.combos = {}
         self.regex_pattern = None
-
+        self.mappings = None
         self._load_mapping()
 
     def _load_mapping(self):
@@ -28,14 +29,21 @@ class Converter:
         with open(self.mapping_file, "r", encoding="utf-8") as file:
             data = json.load(file)
 
-        self.font = data.get("font")
-        mappings = data["mappings"]
+        self.metadata = data.get("metadata")
+        self.rules = data.get("mappings", {}).get("rules", {})
+        self.singles = data.get("mappings", {}).get("singles", {})
+        self.combos = data.get("mappings", {}).get("combos", {})
 
-        # Build a regex pattern that matches combos first, then singles
-        all_mappings = {**mappings.get("combos", {}), **mappings.get("singles", {})}
+        # Build a regex pattern that matches rules first, then combos and last singles
+        all_mappings = {**self.rules, **self.singles, **self.combos}
         self.regex_pattern = re.compile(
             "|".join(
-                re.escape(key) for key in sorted(all_mappings, key=len, reverse=True)
+                re.escape(key)
+                for key in sorted(
+                    all_mappings,
+                    key=lambda x: True if x in self.rules else len(x),
+                    reverse=True,
+                )
             )
         )
         self.mappings = all_mappings
