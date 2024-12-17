@@ -12,11 +12,12 @@ class Converter:
         """
         self.mapping_file = os.path.join("mappings", f"{mapping}.json")
         self.metadata = {}
-        self.rules = {}
         self.singles = {}
         self.combos = {}
-        self.regex_pattern = None
-        self.mappings = None
+        self.letters_pattern = None
+        self.rules_pattern = None
+        self.letter_mappings = None
+        self.rule_mappings = None
         self._load_mapping()
 
     def _load_mapping(self):
@@ -30,23 +31,28 @@ class Converter:
             data = json.load(file)
 
         self.metadata = data.get("metadata")
-        self.rules = data.get("mappings", {}).get("rules", {})
+        self.rule_mappings = data.get("mappings", {}).get("rules", None)
         self.singles = data.get("mappings", {}).get("singles", {})
         self.combos = data.get("mappings", {}).get("combos", {})
 
-        # Build a regex pattern that matches rules first, then combos and last singles
-        all_mappings = {**self.rules, **self.singles, **self.combos}
-        self.regex_pattern = re.compile(
+        # Build a regex pattern that matches combos first, then singles
+        all_mappings = {**self.singles, **self.combos}
+        self.letters_pattern = re.compile(
             "|".join(
                 re.escape(key)
                 for key in sorted(
                     all_mappings,
-                    key=lambda x: True if x in self.rules else len(x),
+                    key=lambda x: len(x),
                     reverse=True,
                 )
             )
         )
-        self.mappings = all_mappings
+        self.letter_mappings = all_mappings
+
+        if self.rule_mappings:
+            self.rules_pattern = re.compile(
+                "|".join(re.escape(key) for key in self.rule_mappings.keys())
+            )
 
     def convert(self, text):
         """
@@ -55,8 +61,19 @@ class Converter:
         :param text: The input string to convert.
         :return: The unicode string.
         """
+        if self.rules_pattern:
+            text = self.rules_pattern.sub(
+                lambda x: self.rule_mappings[x.group(0)], text
+            )
 
-        def replacer(match):
-            return self.mappings[match.group(0)]
+        return self.letters_pattern.sub(
+            lambda x: self.letter_mappings[x.group(0)], text
+        )
 
-        return self.regex_pattern.sub(replacer, text)
+
+# Only for testing
+if __name__ == "__main__":
+    converter = Converter("fm_abhaya")
+    input_text = "rkaosl"
+    output_text = converter.convert(input_text)
+    print(f"Converted text: {output_text}")
