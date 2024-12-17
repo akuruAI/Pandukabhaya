@@ -9,10 +9,11 @@
             "crator": "Pushpananda Ekanayaka"
         },
         "mapping": {
-            "name": "FM Abhaya",
+            "name": "fm_abhaya",
             "version": 1.0,
             "author": "paarandika",
-            "license": ""
+            "license": "",
+            "url": "https://github.com/akuruAI/Pandukabhaya"
         }
     },
     "letters": {
