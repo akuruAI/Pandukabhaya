@@ -11,6 +11,33 @@ The most famous Sinhala ASCII font is 'FM Abhaya' named after King Abhaya (474 B
 - Loads mappings from JSON files for flexibility.
 - Command-line interface for quick and easy usage.
 
+## Installation
+Package is pending release in Pypi. For now clone the repository and install from the clone.
+```bash
+git clone https://github.com/akuruAI/Pandukabhaya.git
+cd Pandukabhaya
+pip install .
+```
+
+## Usage
+
+### As a CLI Tool
+```bash
+pandukabhaya <mapping_name> <text>
+```
+### As a Python Module
+```python
+from pandukabhaya import Converter
+
+converter = Converter("fm_abhaya")
+output = converter.convert("rkaosl")
+print(output)
+```
+### Run tests
+```bash
+python -m unittest tests.test_converter
+```
+
 ## Folder Structure and Explanations
 ```
 PANDUKABHAYA/
@@ -33,23 +60,3 @@ PANDUKABHAYA/
     * prep.ipynb - Cleans and corrects the UCSC mapping file.
     * generation.ipynb - Using improved UCSC mappings as a guide, generates mappings iteratively
 * `tests/`: Contains unit test scripts and test data to ensure code quality and functionality.
-
-
-## Usage
-
-### As a CLI Tool
-```bash
-pandukabhaya <mapping_name> <text>
-```
-### As a Python Module
-```python
-from pandukabhaya import Converter
-
-converter = Converter("fm_abhaya")
-output = converter.convert("rkaosl")
-print(output)
-```
-### Run tests
-```bash
-python -m unittest tests.test_converter
-```
