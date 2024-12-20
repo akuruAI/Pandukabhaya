@@ -12,7 +12,7 @@
             "name": "fm_abhaya",
             "version": 1.0,
             "author": "paarandika",
-            "license": "",
+            "license": "MIT",
             "url": "https://github.com/akuruAI/Pandukabhaya"
         }
     },
@@ -314,8 +314,8 @@
             "“": "ර්‍ණ",
             "ˆ": "න්‍දා",
             "œ": "ර්‍්‍ය",
-            "˜": "”",
-            "—": "”",
+            "˜": "\"",
+            "—": "\"",
             "™": "{",
             "∙": "×",
             "š": "}",
