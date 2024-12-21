@@ -4,7 +4,7 @@ setup(
     name="pandukabhaya",
     version="1.0.0",
     author="akuruAI",
-    description="An ASCII to Unicode text converter for 'FM Abhaya' Sinhala font, with extensibility for other fonts via JSON mappings.",
+    description="An ASCII to Unicode text converter for 'FM Abhaya' Sinhala font, with extensibility for other fonts via JSON mappings.", # noqa
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/akuruAI/Pandukabhaya",
