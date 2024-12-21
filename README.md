@@ -41,21 +41,21 @@ python -m unittest tests.test_converter
 ## Folder Structure and Explanations
 ```
 PANDUKABHAYA/
-├── mappings/
-│   └── fm_abhaya.json
 ├── pandukabhaya/
 │   ├── cli.py
-│   └── converter.py
+│   ├── converter.py
+│   └── mappings/
+│       └── fm_abhaya.json
 ├── scripts/
 │   ├── generation.ipynb
-│   ├── prep.ipynb
+│   └── prep.ipynb
 └── tests/
     ├── test_cases.json
     └── test_converter.py
 ```
 
-* `mappings/`: Contains mapping files.
 * `pandukabhaya/`: Core package directory containing the simple code modules (cli.py, converter.py)
+    * `mappings/`: Contains mapping files.
 * `scripts/`: Contains Jupyter notebooks and mapping files for data analysis, preparation, and generation processes.
     * prep.ipynb - Cleans and corrects the UCSC mapping file.
     * generation.ipynb - Using improved UCSC mappings as a guide, generates mappings iteratively
