@@ -8,7 +8,7 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/akuruAI/Pandukabhaya",
-    packages=find_packages(),
+    packages=find_packages(exclude=["tests", "scripts"]),
     include_package_data=True,
     install_requires=[],
     entry_points={
@@ -23,4 +23,3 @@ setup(
     ],
     python_requires=">=3.6",
 )
-

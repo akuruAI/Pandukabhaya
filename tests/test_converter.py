@@ -17,7 +17,7 @@ class TestConverter(unittest.TestCase):
             test_cases = mapping_data["test_cases"]
 
             # Ensure the mapping file exists
-            mapping_path = os.path.join("mappings", mapping_file)
+            mapping_path = os.path.join(os.path.dirname(__file__), "../pandukabhaya/mappings", mapping_file)
             self.assertTrue(os.path.exists(mapping_path), f"Mapping file {mapping_file} not found.")
 
             # Initialize the converter with the current mapping

@@ -10,7 +10,7 @@ class Converter:
 
         :param mapping: Name of the mapping file (without extension) to load from the 'mappings' directory.
         """
-        self.mapping_file = os.path.join("mappings", f"{mapping}.json")
+        self.mapping_file = os.path.join(os.path.dirname(__file__), "mappings", f"{mapping}.json")
         self.metadata = {}
         self.singles = {}
         self.combos = {}
