@@ -6,6 +6,9 @@ on:
     branches: [main]
   workflow_dispatch: # Manual trigger
 
+permissions:
+  contents: read
+
 jobs:
   pypi-publish:
     name: Publish release to PyPI
