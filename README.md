@@ -14,17 +14,22 @@ The most famous Sinhala ASCII font is 'FM Abhaya' named after King Abhaya (474 B
 ## Installation
 Package is pending release in Pypi. For now clone the repository and install from the clone.
 ```bash
-git clone https://github.com/akuruAI/Pandukabhaya.git
-cd Pandukabhaya
-pip install .
+pip install pandukabhaya
 ```
 
 ## Usage
 
 ### As a CLI Tool
 ```bash
-pandukabhaya <mapping_name> <text>
+pandukabhaya <mapping_name> -t <text>
 ```
+```bash
+pandukabhaya <mapping_name> -t <text> -o <output_file>
+```
+```bash
+pandukabhaya <mapping_name> -i <input_file> -o <output_file>
+```
+
 ### As a Python Module
 ```python
 from pandukabhaya import Converter
